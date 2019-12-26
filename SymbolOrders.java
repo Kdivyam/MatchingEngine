@@ -22,7 +22,7 @@ public class SymbolOrders {
 
     Hashtable<Integer, Float> addOrder(Order order, int orderId) {
 
-        if (order.side.equals("BUY")) {
+        if (order.side == Side.BUY) {
             return handleBuyOrder(order, orderId);
         } else {
             return handleSellOrder(order, orderId);
@@ -30,7 +30,7 @@ public class SymbolOrders {
 
     }
 
-    private Hashtable<Integer, Float> handleBuyOrder(Order order, int orderId) {
+    private Hashtable<Integer, Float> handleSellOrder(Order order, int orderId) {
 
         Hashtable<Integer, Float> matchedOrders = new Hashtable<Integer, Float>();
 
@@ -39,7 +39,7 @@ public class SymbolOrders {
         while (reqQuantity > 0) {
 
             // Case 1: There is a satisfying order...
-            if (buyOrders.peek().getPrice() <= order.price) {
+            if (!buyOrders.isEmpty() && buyOrders.peek().getPrice() >= order.price) {
 
                 // Case 1a: Required quantity is met
                 if (order.quantity <= buyOrders.peek().getQuantity()) {
@@ -81,7 +81,7 @@ public class SymbolOrders {
 
     }
 
-    private Hashtable<Integer, Float> handleSellOrder(Order order, int orderId) {
+    private Hashtable<Integer, Float> handleBuyOrder(Order order, int orderId) {
 
         Hashtable<Integer, Float> matchedOrders = new Hashtable<Integer, Float>();
 
@@ -90,7 +90,7 @@ public class SymbolOrders {
         while (reqQuantity > 0) {
 
             // Case 1: There is a satisfying order...
-            if (sellOrders.peek().getPrice() <= order.price) {
+            if (!sellOrders.isEmpty() && sellOrders.peek().getPrice() <= order.price) {
 
                 // Case 1a: Required quantity is met
                 if (order.quantity <= sellOrders.peek().getQuantity()) {
