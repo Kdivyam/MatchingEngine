@@ -9,6 +9,6 @@ Current Features:
 1. Write test cases for partial fills, order updates, partial fills after order updates.
 2. Add feature for symbol classification: https://www.investopedia.com/terms/s/stocksymbol.asp
 
-[IDEAS]
+[IDEAS] \\
 3. Add customer priority for orders based on historical quantity traded/liquidity provided (HFT Bias!).
 4. Maker/Taker fees
