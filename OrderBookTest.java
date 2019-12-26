@@ -16,21 +16,30 @@ public class OrderBookTest {
 
         orderBook.initialize(symbolArray);
 
-        // Test 1 **********
+        // Test 1 [Two orders cancel out] **********
 
         Order orderA = new Order("Mike", msft, Side.BUY, 152.5, 100);
         orderBook.handleOrder(orderA);
         Hashtable<Integer, Order> restingOrders = orderBook.getRestingOrders();
-        System.out.println(restingOrders);
 
         Order orderB = new Order("James", msft, Side.SELL, 152.4, 100);
         Hashtable<Integer, Order> filledOrders = orderBook.handleOrder(orderB);
-        System.out.println(filledOrders);
 
         restingOrders = orderBook.getRestingOrders();
-        System.out.println(restingOrders);
 
+        // Test 2 [Best order wins] **********
 
+        orderA = new Order("Mike", msft, Side.BUY, 152.5, 100);
+        orderBook.handleOrder(orderA);
+        restingOrders = orderBook.getRestingOrders();
+
+        orderB = new Order("Bob", msft, Side.BUY, 153.6, 100);
+        orderBook.handleOrder(orderB);
+        restingOrders = orderBook.getRestingOrders();
+
+        Order orderC = new Order("James", msft, Side.SELL, 152.4, 100);
+        filledOrders = orderBook.handleOrder(orderC);
+        restingOrders = orderBook.getRestingOrders();
 
 
 
