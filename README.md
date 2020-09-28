@@ -1,4 +1,4 @@
-# MatchingEngine
+# Matching Engine
 A FIFO-based order matching engine for trades on a financial exchange.
 
 Current Features: 
